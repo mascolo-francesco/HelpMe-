@@ -26,6 +26,7 @@ Da traccia:
 - `UPDATE` voto commento id=7 +1
 - `UPDATE` titolo post id=2
 - `DELETE` post con `data_chiusura IS NULL` e `data_inserimento` più vecchia di 1 anno
+- ✅ Implementato in `deliverables/sql/02_required_operations.sql`.
 
 ### A4) Query SQL richieste
 Da traccia (select/join/group by, ecc.) incluse:
@@ -38,6 +39,7 @@ Da traccia (select/join/group by, ecc.) incluse:
 - post non chiusi / chiusi ordinati
 - esperti per categoria
 - utenti senza post
+- ✅ Implementato in `deliverables/sql/03_queries.sql`.
 
 ## B) Consegna “altre quattro ore” (SPA + Flask)
 
@@ -66,5 +68,4 @@ Da traccia (select/join/group by, ecc.) incluse:
   - notifiche
   - admin panel
 - Stati UI: loading/error/success, focus accessibile, validazioni.
-
 
