@@ -17,7 +17,7 @@ FROM problema p
 JOIN users u ON u.id = p.autore_id
 WHERE u.nickname = 'Omega123';
 
--- 3) Post con titolo che contiene "forno" (case-insensitive)
+-- 3) Post con titolo che contiene "forno"
 SELECT p.id,
        p.titolo_post AS titolo,
        p.descrizione,
