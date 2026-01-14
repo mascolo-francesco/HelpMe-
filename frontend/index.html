@@ -26,7 +26,7 @@
                         <button class="btn btn-outline" id="btn-login">Accedi</button>
                         <button class="btn btn-primary" id="btn-register">Registrati</button>
                     </div>
-                    <div class="user-menu auth-only" style="display: none;">
+                    <div class="user-menu auth-only">
                         <button class="btn-icon" id="btn-notifications" title="Notifiche">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
@@ -36,16 +36,53 @@
                         </button>
                         <button class="btn btn-primary" id="btn-new-post">Pubblica problema</button>
                         <div class="user-dropdown">
-                            <button class="avatar-btn" id="user-avatar-btn">
+                            <button class="avatar-btn" id="user-avatar-btn" title="Menu utente">
                                 <span id="user-initials">U</span>
                             </button>
                             <div class="dropdown-menu" id="user-dropdown-menu">
-                                <div class="dropdown-header" id="user-dropdown-name">Utente</div>
-                                <a href="#/profile" class="dropdown-item">Il mio profilo</a>
-                                <a href="#/my-activity" class="dropdown-item">La mia attività</a>
-                                <a href="#/admin" class="dropdown-item admin-only" id="admin-link">Pannello Admin</a>
+                                <div class="dropdown-user-info">
+                                    <div class="dropdown-avatar">
+                                        <span id="dropdown-user-initials">U</span>
+                                    </div>
+                                    <div class="dropdown-user-details">
+                                        <div class="dropdown-user-name" id="user-dropdown-name">Utente</div>
+                                        <div class="dropdown-user-email" id="user-dropdown-email">email@example.com</div>
+                                        <div class="dropdown-user-badge" id="user-dropdown-role">Utente</div>
+                                    </div>
+                                </div>
                                 <hr class="dropdown-divider">
-                                <button class="dropdown-item" id="btn-logout">Esci</button>
+                                <a href="#/profile" class="dropdown-item">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                        <circle cx="12" cy="7" r="4"></circle>
+                                    </svg>
+                                    Il mio profilo
+                                </a>
+                                <a href="#/my-activity" class="dropdown-item">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <rect x="3" y="3" width="7" height="7"></rect>
+                                        <rect x="14" y="3" width="7" height="7"></rect>
+                                        <rect x="14" y="14" width="7" height="7"></rect>
+                                        <rect x="3" y="14" width="7" height="7"></rect>
+                                    </svg>
+                                    La mia attività
+                                </a>
+                                <a href="#/admin" class="dropdown-item admin-only" id="admin-link">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <circle cx="12" cy="12" r="3"></circle>
+                                        <path d="M12 1v6m0 6v6m9-9h-6m-6 0H3"></path>
+                                    </svg>
+                                    Pannello Admin
+                                </a>
+                                <hr class="dropdown-divider">
+                                <button class="dropdown-item dropdown-item-logout" id="btn-logout">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                                        <polyline points="16 17 21 12 16 7"></polyline>
+                                        <line x1="21" y1="12" x2="9" y2="12"></line>
+                                    </svg>
+                                    Esci
+                                </button>
                             </div>
                         </div>
                     </div>

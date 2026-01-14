@@ -46,9 +46,29 @@ class HelpMeApp {
             document.body.classList.add('is-admin');
         }
         
-        // Update UI
-        document.getElementById('user-initials').textContent = this.getInitials(user.nome);
+        // Update UI with user information
+        const initials = this.getInitials(user.nome);
+        document.getElementById('user-initials').textContent = initials;
+        document.getElementById('dropdown-user-initials').textContent = initials;
         document.getElementById('user-dropdown-name').textContent = user.nome;
+        document.getElementById('user-dropdown-email').textContent = user.email;
+        
+        // Update role badge
+        const roleBadge = document.getElementById('user-dropdown-role');
+        const roleText = {
+            'ADMIN': 'Amministratore',
+            'EXPERT': 'Esperto',
+            'USER': 'Utente'
+        };
+        
+        roleBadge.textContent = roleText[user.role] || 'Utente';
+        roleBadge.className = 'dropdown-user-badge';
+        
+        if (user.role === 'ADMIN') {
+            roleBadge.classList.add('admin');
+        } else if (user.role === 'EXPERT') {
+            roleBadge.classList.add('expert');
+        }
         
         // Load notifications
         this.loadNotifications();
@@ -191,6 +211,13 @@ class HelpMeApp {
         document.getElementById('user-avatar-btn').addEventListener('click', (e) => {
             e.stopPropagation();
             document.getElementById('user-dropdown-menu').classList.toggle('show');
+        });
+        
+        // Close dropdown when clicking on links inside
+        document.querySelectorAll('#user-dropdown-menu .dropdown-item').forEach(item => {
+            item.addEventListener('click', () => {
+                document.getElementById('user-dropdown-menu').classList.remove('show');
+            });
         });
 
         // Notifications button

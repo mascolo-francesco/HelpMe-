@@ -284,7 +284,7 @@ a:hover {
     height: 40px;
     border-radius: 50%;
     background: var(--color-primary);
-    border: none;
+    border: 2px solid transparent;
     color: white;
     font-weight: 600;
     font-size: 0.9rem;
@@ -292,6 +292,12 @@ a:hover {
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: all 0.2s;
+}
+
+.avatar-btn:hover {
+    border-color: var(--color-primary-dark);
+    transform: scale(1.05);
 }
 
 .dropdown-menu {
@@ -302,14 +308,92 @@ a:hover {
     background: var(--color-surface);
     border: 2px solid var(--color-border);
     border-radius: 12px;
-    min-width: 200px;
+    min-width: 280px;
     box-shadow: var(--shadow-soft);
     display: none;
     z-index: 200;
+    overflow: hidden;
 }
 
 .dropdown-menu.show {
     display: block;
+    animation: dropdown-slide 0.2s ease-out;
+}
+
+@keyframes dropdown-slide {
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.dropdown-user-info {
+    padding: 1.25rem;
+    display: flex;
+    gap: 1rem;
+    background: linear-gradient(135deg, var(--color-bg) 0%, var(--color-surface) 100%);
+}
+
+.dropdown-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--color-primary);
+    color: white;
+    font-weight: 700;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.dropdown-user-details {
+    flex: 1;
+    min-width: 0;
+}
+
+.dropdown-user-name {
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--color-text);
+    margin-bottom: 0.25rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.dropdown-user-email {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    margin-bottom: 0.5rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.dropdown-user-badge {
+    display: inline-block;
+    padding: 0.25rem 0.625rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.025em;
+    border-radius: 6px;
+    background: var(--color-secondary);
+    color: white;
+}
+
+.dropdown-user-badge.admin {
+    background: var(--color-primary);
+}
+
+.dropdown-user-badge.expert {
+    background: var(--color-accent);
 }
 
 .dropdown-header {
@@ -319,7 +403,9 @@ a:hover {
 }
 
 .dropdown-item {
-    display: block;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
     padding: 0.75rem 1rem;
     color: var(--color-text);
     text-decoration: none;
@@ -332,9 +418,31 @@ a:hover {
     cursor: pointer;
 }
 
+.dropdown-item svg {
+    flex-shrink: 0;
+    opacity: 0.6;
+}
+
 .dropdown-item:hover {
     background: var(--color-bg);
     text-decoration: none;
+}
+
+.dropdown-item:hover svg {
+    opacity: 1;
+    color: var(--color-primary);
+}
+
+.dropdown-item-logout {
+    color: var(--color-error);
+}
+
+.dropdown-item-logout:hover {
+    background: rgba(216, 90, 60, 0.08);
+}
+
+.dropdown-item-logout svg {
+    opacity: 0.8;
 }
 
 .dropdown-divider {
