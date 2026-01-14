@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HelpMe! — Aiuto Reciproco tra Persone</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div id="app">
+        <!-- Header -->
+        <header class="header" id="header">
+            <div class="header-content">
+                <a href="#/" class="logo" id="logo-link">HelpMe!</a>
+                <nav class="nav" id="main-nav">
+                    <a href="#/" class="nav-link" data-page="home">Esplora</a>
+                    <a href="#/categories" class="nav-link" data-page="categories">Categorie</a>
+                    <a href="#/experts" class="nav-link" data-page="experts">Esperti</a>
+                    <a href="#/my-activity" class="nav-link auth-only" data-page="my-activity">La mia attività</a>
+                </nav>
+                <div class="header-actions">
+                    <div class="auth-buttons guest-only">
+                        <button class="btn btn-outline" id="btn-login">Accedi</button>
+                        <button class="btn btn-primary" id="btn-register">Registrati</button>
+                    </div>
+                    <div class="user-menu auth-only" style="display: none;">
+                        <button class="btn-icon" id="btn-notifications" title="Notifiche">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                                <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                            </svg>
+                            <span class="notification-badge" id="notification-count" style="display: none;">0</span>
+                        </button>
+                        <button class="btn btn-primary" id="btn-new-post">Pubblica problema</button>
+                        <div class="user-dropdown">
+                            <button class="avatar-btn" id="user-avatar-btn">
+                                <span id="user-initials">U</span>
+                            </button>
+                            <div class="dropdown-menu" id="user-dropdown-menu">
+                                <div class="dropdown-header" id="user-dropdown-name">Utente</div>
+                                <a href="#/profile" class="dropdown-item">Il mio profilo</a>
+                                <a href="#/my-activity" class="dropdown-item">La mia attività</a>
+                                <a href="#/admin" class="dropdown-item admin-only" id="admin-link">Pannello Admin</a>
+                                <hr class="dropdown-divider">
+                                <button class="dropdown-item" id="btn-logout">Esci</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main id="main-content">
+            <!-- Content will be loaded dynamically -->
+        </main>
+
+        <!-- Login Modal -->
+        <div class="modal" id="login-modal">
+            <div class="modal-backdrop"></div>
+            <div class="modal-content">
+                <button class="modal-close" id="close-login">&times;</button>
+                <h2 class="modal-title">Accedi a HelpMe!</h2>
+                <form id="login-form">
+                    <div class="form-group">
+                        <label for="login-email">Email</label>
+                        <input type="email" id="login-email" required placeholder="La tua email">
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password">Password</label>
+                        <input type="password" id="login-password" required placeholder="La tua password">
+                    </div>
+                    <div class="form-error" id="login-error"></div>
+                    <button type="submit" class="btn btn-primary btn-full">Accedi</button>
+                </form>
+                <p class="modal-footer-text">
+                    Non hai un account? <a href="#" id="switch-to-register">Registrati</a>
+                </p>
+            </div>
+        </div>
+
+        <!-- Register Modal -->
+        <div class="modal" id="register-modal">
+            <div class="modal-backdrop"></div>
+            <div class="modal-content">
+                <button class="modal-close" id="close-register">&times;</button>
+                <h2 class="modal-title">Unisciti a HelpMe!</h2>
+                <form id="register-form">
+                    <div class="form-group">
+                        <label for="register-nome">Nome completo</label>
+                        <input type="text" id="register-nome" required placeholder="Il tuo nome">
+                    </div>
+                    <div class="form-group">
+                        <label for="register-nickname">Nickname</label>
+                        <input type="text" id="register-nickname" required placeholder="Scegli un nickname">
+                    </div>
+                    <div class="form-group">
+                        <label for="register-email">Email</label>
+                        <input type="email" id="register-email" required placeholder="La tua email">
+                    </div>
+                    <div class="form-group">
+                        <label for="register-password">Password</label>
+                        <input type="password" id="register-password" required minlength="6" placeholder="Minimo 6 caratteri">
+                    </div>
+                    <div class="form-error" id="register-error"></div>
+                    <button type="submit" class="btn btn-primary btn-full">Registrati</button>
+                </form>
+                <p class="modal-footer-text">
+                    Hai già un account? <a href="#" id="switch-to-login">Accedi</a>
+                </p>
+            </div>
+        </div>
+
+        <!-- New Post Modal -->
+        <div class="modal" id="new-post-modal">
+            <div class="modal-backdrop"></div>
+            <div class="modal-content modal-large">
+                <button class="modal-close" id="close-new-post">&times;</button>
+                <h2 class="modal-title">Pubblica un problema</h2>
+                <form id="new-post-form">
+                    <div class="form-group">
+                        <label for="post-title">Titolo</label>
+                        <input type="text" id="post-title" required placeholder="Un titolo sintetico per il tuo problema">
+                    </div>
+                    <div class="form-group">
+                        <label for="post-description">Descrizione</label>
+                        <textarea id="post-description" required rows="5" placeholder="Descrivi il problema nel dettaglio..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Categorie</label>
+                        <div class="categories-select" id="post-categories"></div>
+                        <small class="form-hint">Seleziona almeno una categoria</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="post-media">URL immagine (opzionale)</label>
+                        <input type="url" id="post-media" placeholder="https://...">
+                    </div>
+                    <div class="form-error" id="post-error"></div>
+                    <button type="submit" class="btn btn-primary btn-full">Pubblica</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Notifications Panel -->
+        <div class="notifications-panel" id="notifications-panel" style="display: none;">
+            <div class="notifications-header">
+                <h3>Notifiche</h3>
+                <button class="btn-text" id="mark-all-read">Segna tutte come lette</button>
+            </div>
+            <div class="notifications-list" id="notifications-list">
+                <p class="no-notifications">Nessuna notifica</p>
+            </div>
+        </div>
+
+        <!-- Toast Container -->
+        <div class="toast-container" id="toast-container"></div>
+    </div>
+
+    <script src="js/api.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
