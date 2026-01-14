@@ -29,18 +29,26 @@
   - README.md aggiornato con istruzioni complete
 
 ## In corso
-- Test con database MySQL connesso (Aiven)
+- Nessuna attività in corso - sistema funzionante
 
 ## Da fare (high level)
 - [x] Progettazione API REST
 - [x] Backend Flask
 - [x] Frontend SPA
-- [ ] Collegare a database MySQL su Aiven per test completo
+- [x] Collegare a database MySQL su Aiven
+- [x] Inizializzare database con schema e dati demo
+- [ ] Test completo dell'applicazione end-to-end
 - [ ] Documentazione consegna (ER grafico, se richiesto)
+- [ ] Review finale e ottimizzazioni
 
-## Problemi noti / rischi
-- Implementato upvote/downvote invece di voto 1-5 (piu semplice e comune)
-- Database non ancora connesso (richiede credenziali Aiven)
+## Problemi risolti
+- ✅ **Database Aiven**: inizialmente lo script `init_db.sql` era stato eseguito solo localmente. Risolto eseguendo lo script sul database remoto tramite Python.
+- ✅ **Dati di esempio**: inseriti con successo nel database remoto
+
+## Note tecniche
+- Implementato upvote/downvote invece di voto 1-5 (più semplice e comune nei forum)
+- Database hostato su Aiven: `mysql-chatdb-chatwithdb.h.aivencloud.com:19515`
+- Connessione SSL attiva per sicurezza
 
 ## Documenti chiave
 - `memory-bank/dataModel.md` (E/R testuale + modello logico)

@@ -1,10 +1,23 @@
 # Active Context - HelpMe!
 
 ## Stato attuale
-L'applicazione HelpMe! è stata completamente sviluppata con:
+L'applicazione HelpMe! è stata completamente sviluppata e **funzionante**:
 - **Backend Flask** con API REST complete
 - **Frontend SPA** (HTML/CSS/JS) con design system applicato
-- **Database schema** pronto per MySQL/Aiven
+- **Database MySQL su Aiven** inizializzato e funzionante
+- **Dati di esempio** inseriti (10 categorie, 5 utenti, 3 post, 4 commenti)
+
+## Ultimo problema risolto (14 gen 2026)
+L'applicazione restituiva errori 500 perché:
+- Il database Aiven remoto era configurato correttamente nel `.env`
+- Ma lo script `init_db.sql` era stato eseguito solo su MySQL locale, non su Aiven
+- Risultato: connessione OK, ma tabelle inesistenti sul database remoto
+
+**Soluzione applicata**:
+1. Eseguito `init_db.sql` sul database Aiven remoto tramite script Python
+2. Create tutte le 16 tabelle del sistema
+3. Inseriti dati demo: 10 categorie, 5 utenti (incluso admin), 3 post, 4 commenti, esperti, voti
+4. Verificata connettività e integrità del database
 
 ## Decisioni prese
 - **Votazione**: implementato **upvote/downvote** come sistema di voto sui commenti
@@ -43,10 +56,12 @@ frontend/
 ```
 
 ## Per testare
-1. Configurare `.env` con credenziali database
-2. Eseguire `init_db.sql` su MySQL
-3. Avviare: `cd backend && python app.py`
-4. Aprire: http://localhost:5000
+1. ✅ `.env` già configurato con credenziali Aiven
+2. ✅ Database Aiven già inizializzato con schema e dati
+3. Avviare server: `cd backend && source venv/bin/activate && python app.py`
+4. Aprire browser: http://localhost:5000
+
+**Nota**: Il database è già pronto su Aiven. Non serve più eseguire `init_db.sql` manualmente a meno di reset completo.
 
 ## Credenziali demo
 - Admin: admin@helpme.it / admin123
