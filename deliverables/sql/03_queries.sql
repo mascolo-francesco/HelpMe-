@@ -25,7 +25,7 @@ SELECT p.id,
        u.nickname AS autore
 FROM problema p
 JOIN users u ON u.id = p.autore_id
-WHERE LOWER(p.titolo_post) LIKE '%forno%';
+WHERE p.titolo_post LIKE '%forno%';
 
 -- 4) Commenti per il post con id=1 (id commento, testo, data, nome autore)
 SELECT c.id AS id_commento,
@@ -62,21 +62,20 @@ GROUP BY p.id, p.titolo_post
 HAVING COUNT(c.id) > 3;
 
 -- 8) Post con il numero massimo di commenti (tutti quelli a pari merito)
-SELECT p.id AS post_id,
-       p.titolo_post AS titolo,
-       COUNT(c.id) AS numero_commenti
-FROM problema p
-LEFT JOIN commenti c ON c.post_id = p.id
-GROUP BY p.id, p.titolo_post
-HAVING COUNT(c.id) = (
-  SELECT MAX(comment_count)
-  FROM (
-    SELECT p2.id, COUNT(c2.id) AS comment_count
-    FROM problema p2
-    LEFT JOIN commenti c2 ON c2.post_id = p2.id
-    GROUP BY p2.id
-  ) AS counts
-);
+WITH comment_counts AS (
+  SELECT p.id AS post_id,
+         p.titolo_post AS titolo,
+         COUNT(c.id) AS numero_commenti,
+         DENSE_RANK() OVER (ORDER BY COUNT(c.id) DESC) AS rnk
+  FROM problema p
+  LEFT JOIN commenti c ON c.post_id = p.id
+  GROUP BY p.id, p.titolo_post
+)
+SELECT post_id,
+       titolo,
+       numero_commenti
+FROM comment_counts
+WHERE rnk = 1;
 
 -- 9) Post non chiusi (data_chiusura NULL), ordinati per data di inserimento crescente
 SELECT p.id,
@@ -118,4 +117,3 @@ SELECT u.id,
 FROM users u
 LEFT JOIN problema p ON p.autore_id = u.id
 WHERE p.id IS NULL;
-
