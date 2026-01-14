@@ -27,7 +27,7 @@ def update_user_score(user_id, category_ids, vote_delta):
                 (new_score, is_expert, user_id, cat_id)
             )
         else:
-            new_score = max(0, vote_delta)
+            new_score = vote_delta
             is_expert = 1 if new_score >= expert_threshold else 0
             execute_insert(
                 """INSERT INTO user_category_stats (user_id, categoria_id, score, is_expert, updated_at)

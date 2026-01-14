@@ -1,7 +1,7 @@
 # Active Context - HelpMe!
 
 ## Stato attuale
-L'applicazione HelpMe! e stata completamente sviluppata con:
+L'applicazione HelpMe! è stata completamente sviluppata con:
 - **Backend Flask** con API REST complete
 - **Frontend SPA** (HTML/CSS/JS) con design system applicato
 - **Database schema** pronto per MySQL/Aiven
